@@ -43,9 +43,10 @@ async function deployDiamond () {
   await erc1155MintFacet.deployed()
   console.log(`ERC1155MintFacet deployed: ${erc1155MintFacet.address}`)
   
-  // Add ERC1155MintFacet functions
+  // Add ERC1155MintFacet functions that will be used to mint ERC1155 tokens
   const functionsToKeep = ['mint(uint256,uint256,string)', 'uri(uint256)']
   const selectors = getSelectors(erc1155MintFacet).get(functionsToKeep)
+  // Add ERC1155MintFacet functions to facetCuts array
   facetCuts.push({
     facetAddress: erc1155MintFacet.address,
     action: FacetCutAction.Add,

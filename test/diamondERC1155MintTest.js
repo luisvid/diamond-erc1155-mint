@@ -34,7 +34,7 @@ describe('DiamondTest', async function () {
     assert.equal(addresses.length, 3)
   })
 
-  it('should add ERC1155MintFacet functions', async () => {
+  it('Should add ERC1155MintFacet functions', async () => {
     // Deploy ERC1155MintFacet
     const ERC1155MintFacet = await ethers.getContractFactory('ERC1155MintFacet')
     erc1155MintFacet = await ERC1155MintFacet.deploy()
@@ -42,7 +42,7 @@ describe('DiamondTest', async function () {
     console.log(`ERC1155MintFacet deployed: ${erc1155MintFacet.address}`)
     addresses.push(erc1155MintFacet.address)
 
-    // Add ERC1155MintFacet functions
+    // Add ERC1155MintFacet functions trough diamondCut function in DiamondCutFacet
     const functionsToKeep = ['mint(uint256,uint256,string)', 'uri(uint256)']
     const selectors = getSelectors(erc1155MintFacet).get(functionsToKeep)
     tx = await diamondCutFacet.diamondCut(
@@ -56,12 +56,13 @@ describe('DiamondTest', async function () {
     if (!receipt.status) {
       throw Error(`Diamond upgrade failed: ${tx.hash}`)
     }
-    // Check ERC1155MintFacet functions
+    // Check if ERC1155MintFacet functions were added
     result = await diamondLoupeFacet.facetFunctionSelectors(erc1155MintFacet.address)
     assert.sameMembers(result, selectors)
   })
 
-  it('should have Four facets -- call to facetAddresses function', async () => {
+  it('Should have Four facets -- call to facetAddresses function', async () => {
+    // the new facet ERC1155MintFacet should be added to the list of facets
     const facets = await diamondLoupeFacet.facetAddresses()
     assert.equal(facets.length, 4)
   })

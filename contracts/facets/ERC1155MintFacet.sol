@@ -7,11 +7,11 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 // Library for handling the shared storage structure for the ERC1155MintFacet.
 library ERC1155MintFacetLib {
-    // Define a unique storage position for our diamond storage.
+    // Define a unique storage position for the diamond storage.
     // This is done to avoid any potential storage layout conflicts with other facets.
     bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("diamond.standard.erc1155mintfacet.storage");
 
-    // Define the structure that represents our facet's state in storage.
+    // Define the structure that represents the facet's state in storage.
     struct MintFacetState {
         mapping(address => bool) hasMinted; // Track if an address has minted a token.
         mapping(uint256 => string) tokenURIs; // Store unique URIs for each token ID.
@@ -22,7 +22,7 @@ library ERC1155MintFacetLib {
     function diamondStorage() internal pure returns (MintFacetState storage ds) {
         bytes32 position = DIAMOND_STORAGE_POSITION;
         assembly {
-            ds.slot := position // Set the storage slot for our MintFacetState structure.
+            ds.slot := position // Set the storage slot for the MintFacetState structure.
         }
     }
 }
