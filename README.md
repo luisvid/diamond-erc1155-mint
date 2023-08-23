@@ -22,7 +22,7 @@ npx hardhat test
 
 ## Deployment
 
-To complete the deployment of all the Diamond contracts on Sepolia testnet, first rename .env.example to .env, enter your private key and the required API keys, and then run the command:
+To complete the deployment of all the Diamond contracts on Sepolia testnet, first rename `.env.example` to `.env`, enter your private key and the required API keys, and then run the command:
 
 ```console
 npx hardhat run scripts/deployDiamondWithERC1155.js --network sepolia
@@ -41,11 +41,11 @@ The `contracts/Diamond.sol` file shows an example of implementing a diamond.
 
 The `contracts/facets/DiamondCutFacet.sol` file shows how to implement the `diamondCut` external function.
 
-The `contracts/facets/DiamondLoupeFacet.sol` file shows how to implement the four standard loupe functions.
+The `contracts/facets/DiamondLoupeFacet.sol` file shows how to implement the four standard `loupe functions`.
 
-The `contracts/facets/ERC1155MintFacet.sol` file shows the ERC-1155 implementation.
+The `contracts/facets/ERC1155MintFacet.sol` file shows the `ERC-1155` implementation.
 
 The `contracts/libraries/LibDiamond.sol` file shows how to implement Diamond Storage and a `diamondCut` internal function.
 
-The `scripts/deploy-test.js` file deploys all the facets, except for the ERC-1155 implementation, to be used in the tests.
+The `scripts/deploy-test.js` file deploys all the facets, except for the `ERC-1155` implementation, to be used in the tests.
 
